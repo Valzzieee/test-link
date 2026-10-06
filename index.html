@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seberapa Tahu Dirimu Tentangku?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ================= HOME ================= -->
+        <section id="homePage" class="page">
+            <div class="hero">
+                <div class="heart">♡</div>
+                <h1>Seberapa Tahu<br>Dirimu Tentangku?</h1>
+                <p>
+                    Buat quiz tentang dirimu dan lihat<br>
+                    seberapa baik temanmu mengenalmu.
+                </p>
+
+                <button onclick="showCreatePage()" class="primary-btn">
+                    Buat Quiz-ku
+                </button>
+
+                <button onclick="showJoinPage()" class="secondary-btn">
+                    Kerjakan Quiz
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ================= CREATE ================= -->
+        <section id="createPage" class="page hidden">
+
+            <div class="top-bar">
+                <button onclick="goHome()" class="back-btn">←</button>
+                <h2>Buat Quiz</h2>
+            </div>
+
+            <div class="card">
+
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span id="questionNumber">Soal 1 dari 20</span>
+                        <span id="progressPercent">5%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div id="progressFill"></div>
+                    </div>
+                </div>
+
+                <label>Nama kamu</label>
+                <input
+                    type="text"
+                    id="creatorName"
+                    placeholder="Contoh: Kayla"
+                >
+
+                <div id="questionForm">
+
+                    <label id="questionLabel">
+                        Soal 1
+                    </label>
+
+                    <input
+                        type="text"
+                        id="questionInput"
+                        placeholder="Contoh: Apa makanan favoritku?"
+                    >
+
+                    <label>Pilihan jawaban</label>
+
+                    <div class="choice-input">
+                        <input
+                            type="text"
+                            id="choice0"
+                            placeholder="Pilihan A"
+                        >
+                        <button onclick="selectCorrect(0)" id="correct0">
+                            ✓
+                        </button>
+                    </div>
+
+                    <div class="choice-input">
+                        <input
+                            type="text"
+                            id="choice1"
+                            placeholder="Pilihan B"
+                        >
+                        <button onclick="selectCorrect(1)" id="correct1">
+                            ✓
+                        </button>
+                    </div>
+
+                    <div class="choice-input">
+                        <input
+                            type="text"
+                            id="choice2"
+                            placeholder="Pilihan C"
+                        >
+                        <button onclick="selectCorrect(2)" id="correct2">
+                            ✓
+                        </button>
+                    </div>
+
+                    <div class="choice-input">
+                        <input
+                            type="text"
+                            id="choice3"
+                            placeholder="Pilihan D"
+                        >
+                        <button onclick="selectCorrect(3)" id="correct3">
+                            ✓
+                        </button>
+                    </div>
+
+                    <p class="hint">
+                        Klik ✓ pada pilihan yang merupakan jawaban benar.
+                    </p>
+
+                </div>
+
+                <button onclick="nextCreateQuestion()" class="primary-btn">
+                    <span id="nextButtonText">Soal Berikutnya →</span>
+                </button>
+
+            </div>
+        </section>
+
+
+        <!-- ================= CREATE RESULT ================= -->
+        <section id="createdPage" class="page hidden">
+
+            <div class="result-card">
+
+                <div class="success-icon">✓</div>
+
+                <h1>Quiz berhasil dibuat!</h1>
+
+                <p>
+                    Sekarang bagikan quiz ini kepada temanmu.
+                </p>
+
+                <div class="share-box">
+                    <input id="shareLink" readonly>
+                    <button onclick="copyQuizLink()">
+                        Salin
+                    </button>
+                </div>
+
+                <button onclick="shareQuiz()" class="primary-btn">
+                    Bagikan Quiz
+                </button>
+
+                <button onclick="goHome()" class="secondary-btn">
+                    Kembali ke Beranda
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= JOIN ================= -->
+        <section id="joinPage" class="page hidden">
+
+            <div class="top-bar">
+                <button onclick="goHome()" class="back-btn">←</button>
+                <h2>Kerjakan Quiz</h2>
+            </div>
+
+            <div class="card">
+
+                <h2>Masukkan nama kamu</h2>
+
+                <p>
+                    Nama ini hanya digunakan untuk menampilkan hasil
+                    di perangkatmu.
+                </p>
+
+                <input
+                    type="text"
+                    id="playerName"
+                    placeholder="Contoh: Andi"
+                >
+
+                <button onclick="startQuiz()" class="primary-btn">
+                    Mulai Quiz →
+                </button>
+
+                <div class="notice">
+                    💡 Kamu perlu mendapatkan link quiz dari orang
+                    yang membuatnya.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUIZ ================= -->
+        <section id="quizPage" class="page hidden">
+
+            <div class="top-bar">
+                <h2 id="quizCreatorTitle">
+                    Quiz
+                </h2>
+
+                <span id="quizCounter">
+                    1 / 20
+                </span>
+            </div>
+
+            <div class="card">
+
+                <div class="progress-bar">
+                    <div id="quizProgress"></div>
+                </div>
+
+                <h1 id="quizQuestion">
+                    Pertanyaan
+                </h1>
+
+                <div id="quizChoices"></div>
+
+                <button
+                    onclick="nextQuizQuestion()"
+                    class="primary-btn"
+                    id="quizNextButton"
+                >
+                    Berikutnya →
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FINAL RESULT ================= -->
+        <section id="finalPage" class="page hidden">
+
+            <div class="result-card">
+
+                <div id="scoreEmoji" class="score-emoji">
+                    🎉
+                </div>
+
+                <p id="resultPlayer"></p>
+
+                <h1>
+                    <span id="finalScore">0</span>/100
+                </h1>
+
+                <h2 id="resultMessage">
+                    Seberapa tahu kamu tentangku?
+                </h2>
+
+                <div class="result-stats">
+
+                    <div>
+                        <strong id="correctCount">0</strong>
+                        <span>Benar</span>
+                    </div>
+
+                    <div>
+                        <strong id="wrongCount">0</strong>
+                        <span>Salah</span>
+                    </div>
+
+                    <div>
+                        <strong>20</strong>
+                        <span>Soal</span>
+                    </div>
+
+                </div>
+
+                <div id="wrongQuestions"></div>
+
+                <button onclick="goHome()" class="secondary-btn">
+                    Kembali ke Beranda
+                </button>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
