@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Seberapa Tahu Dirimu Tentangku?</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =========================
+         HOME
+    ========================== -->
+
+    <section
+        id="homePage"
+        class="page"
+    >
+
+        <div class="container home-container">
+
+            <div class="emoji-logo">
+                💭
+            </div>
+
+            <h1>
+                Seberapa Tahu<br>
+                Dirimu Tentangku?
+            </h1>
+
+            <p class="subtitle">
+                Buat quiz tentang dirimu dan lihat
+                seberapa baik temanmu mengenalmu!
+            </p>
+
+            <div class="home-buttons">
+
+                <button
+                    class="primary-button"
+                    onclick="goToCreate()"
+                >
+                    Buat Quiz-ku
+                </button>
+
+                <button
+                    class="secondary-button"
+                    onclick="goToJoin()"
+                >
+                    Kerjakan Quiz
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CREATE QUIZ
+    ========================== -->
+
+    <section
+        id="createPage"
+        class="page hidden"
+    >
+
+        <div class="container">
+
+            <div class="top-title">
+
+                <span class="small-label">
+                    BUAT QUIZ
+                </span>
+
+                <h1>
+                    Tentang Dirimu
+                </h1>
+
+                <p class="subtitle">
+                    Pilih jawaban yang benar untuk
+                    setiap pertanyaan.
+                </p>
+
+            </div>
+
+
+            <div class="quiz-card">
+
+                <!-- NAMA PEMBUAT -->
+
+                <div class="input-group">
+
+                    <label for="creatorName">
+                        Namamu
+                    </label>
+
+                    <input
+                        type="text"
+                        id="creatorName"
+                        placeholder="Contoh: Pipi"
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <!-- PROGRESS -->
+
+                <div
+                    class="question-number"
+                    id="creatorProgress"
+                >
+                    Pertanyaan 1 dari 20
+                </div>
+
+
+                <!-- JUDUL -->
+
+                <h2 id="creatorQuestionTitle">
+                    Makanan
+                </h2>
+
+
+                <!-- PERTANYAAN -->
+
+                <p
+                    id="creatorQuestion"
+                    class="question-description"
+                >
+                    Apa makanan yang paling kamu sukai?
+                </p>
+
+
+                <!-- PILIHAN -->
+
+                <div
+                    id="creatorChoices"
+                    class="choices"
+                >
+                    <!-- Diisi oleh JavaScript -->
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="nextCreatorQuestion()"
+                >
+                    Selanjutnya
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUIZ BERHASIL DIBUAT
+    ========================== -->
+
+    <section
+        id="createdPage"
+        class="page hidden"
+    >
+
+        <div class="container">
+
+            <div class="quiz-card center-card">
+
+                <div class="success-icon">
+                    🎉
+                </div>
+
+                <h1>
+                    Quiz Berhasil Dibuat!
+                </h1>
+
+                <p class="subtitle">
+                    Bagikan link ini kepada temanmu.
+                </p>
+
+
+                <div class="input-group share-group">
+
+                    <label for="shareLink">
+                        Link Quiz
+                    </label>
+
+                    <input
+                        type="text"
+                        id="shareLink"
+                        readonly
+                    >
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="copyShareLink()"
+                >
+                    Salin Link
+                </button>
+
+
+                <button
+                    class="secondary-button"
+                    onclick="backToHome()"
+                >
+                    Kembali ke Beranda
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         JOIN QUIZ
+    ========================== -->
+
+    <section
+        id="joinPage"
+        class="page hidden"
+    >
+
+        <div class="container">
+
+            <div class="quiz-card center-card">
+
+                <div class="emoji-logo small">
+                    📝
+                </div>
+
+                <h1>
+                    Yuk Kerjakan Quiz!
+                </h1>
+
+                <p class="subtitle">
+                    Masukkan namamu sebelum mulai.
+                </p>
+
+
+                <div class="input-group">
+
+                    <label for="playerName">
+                        Namamu
+                    </label>
+
+                    <input
+                        type="text"
+                        id="playerName"
+                        placeholder="Masukkan namamu"
+                        maxlength="30"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <button
+                    class="primary-button"
+                    onclick="startQuiz()"
+                >
+                    Mulai Quiz
+                </button>
+
+
+                <button
+                    class="secondary-button"
+                    onclick="backToHome()"
+                >
+                    Kembali
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUIZ
+    ========================== -->
+
+    <section
+        id="quizPage"
+        class="page hidden"
+    >
+
+        <div class="container">
+
+            <div class="quiz-header">
+
+                <span class="small-label">
+                    QUIZ
+                </span>
+
+                <h1 id="quizCreatorTitle">
+                    Seberapa tahu kamu tentang Pipi?
+                </h1>
+
+
+                <div
+                    class="quiz-counter"
+                    id="quizCounter"
+                >
+                    1 / 20
+                </div>
+
+
+                <div class="progress-container">
+
+                    <div
+                        id="quizProgress"
+                        class="progress-bar"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="quiz-card">
+
+                <h2 id="quizQuestion">
+                    Makanan apa yang paling disukai Pipi?
+                </h2>
+
+
+                <div
+                    id="quizChoices"
+                    class="choices"
+                >
+                    <!-- Diisi JavaScript -->
+                </div>
+
+
+                <button
+                    id="quizNextButton"
+                    class="primary-button"
+                    onclick="nextQuizQuestion()"
+                >
+                    Selanjutnya
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HASIL QUIZ
+    ========================== -->
+
+    <section
+        id="finalPage"
+        class="page hidden"
+    >
+
+        <div class="container">
+
+            <div class="quiz-card center-card">
+
+                <div class="success-icon">
+                    ✨
+                </div>
+
+                <h1>
+                    Hasil Quiz
+                </h1>
+
+
+                <p class="subtitle">
+
+                    Seberapa tahu kamu tentang
+
+                    <strong id="resultCreatorName">
+                        Pipi
+                    </strong>?
+
+                </p>
+
+
+                <!-- NILAI -->
+
+                <div class="score-box">
+
+                    <div
+                        id="finalScore"
+                        class="score"
+                    >
+                        0/100
+                    </div>
+
+                    <p>
+                        Nilai kamu
+                    </p>
+
+                </div>
+
+
+                <!-- BENAR / SALAH -->
+
+                <div class="result-summary">
+
+                    <div class="result-item">
+
+                        <span
+                            id="correctCount"
+                            class="result-number"
+                        >
+                            0
+                        </span>
+
+                        <span>
+                            Benar
+                        </span>
+
+                    </div>
+
+
+                    <div class="result-item">
+
+                        <span
+                            id="wrongCount"
+                            class="result-number"
+                        >
+                            0
+                        </span>
+
+                        <span>
+                            Salah
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SOAL SALAH -->
+
+                <h2 class="wrong-title">
+                    Jawaban yang Salah
+                </h2>
+
+
+                <div
+                    id="wrongQuestions"
+                    class="wrong-questions"
+                >
+                    <!-- Diisi JavaScript -->
+                </div>
+
+
+                <button
+                    class="secondary-button"
+                    onclick="backToHome()"
+                >
+                    Kembali ke Beranda
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
